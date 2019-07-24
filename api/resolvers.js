@@ -1,10 +1,10 @@
-import fs from 'fs'
-import apolloServerKoa from 'apollo-server-koa'
-import lowdb from 'lowdb'
-import FileSync from 'lowdb/adapters/FileSync'
-import mkdirp from 'mkdirp'
-import promisesAll from 'promises-all'
-import shortid from 'shortid'
+const fs = require('fs');
+const apolloServerKoa = require('apollo-server-koa');
+const lowdb = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const mkdirp = require('mkdirp');
+const promisesAll = require('promises-all');
+const shortid = require('shortid');
 
 const UPLOAD_DIR = './uploads'
 const db = lowdb(new FileSync('db.json'))
@@ -46,7 +46,7 @@ const processUpload = async upload => {
   return storeDB({ id, filename, mimetype, path })
 }
 
-export default {
+module.exports = {
   Upload: apolloServerKoa.GraphQLUpload,
   Query: {
     uploads: () => db.get('uploads').value()

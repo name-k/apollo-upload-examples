@@ -1,4 +1,4 @@
-export default /* GraphQL */ `
+module.exports = /* GraphQL */ `
   type File {
     id: ID!
     path: String!

@@ -1,7 +1,7 @@
-import apolloServerKoa from 'apollo-server-koa'
-import Koa from 'koa'
-import resolvers from './resolvers'
-import typeDefs from './types'
+const apolloServerKoa = require('apollo-server-koa')
+const Koa = require('koa')
+const resolvers = require('./resolvers')
+const typeDefs = require('./types')
 
 const app = new Koa()
 const server = new apolloServerKoa.ApolloServer({
@@ -17,7 +17,18 @@ const server = new apolloServerKoa.ApolloServer({
   }
 })
 
-server.applyMiddleware({ app })
+app.use(async (ctx, next) => {
+  console.log(ctx.request.body);
+  next();
+  console.log(ctx.request.body);
+})
+
+server.applyMiddleware({ app });
+
+// app.use(async (ctx, next) => {
+//   console.log('Middleware 2');
+//   next();
+// })
 
 app.listen(process.env.PORT, error => {
   if (error) throw error
