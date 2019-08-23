@@ -17,12 +17,6 @@ const server = new apolloServerKoa.ApolloServer({
   }
 })
 
-app.use(async (ctx, next) => {
-  console.log(ctx.request.body);
-  next();
-  console.log(ctx.request.body);
-})
-
 server.applyMiddleware({ app });
 
 // app.use(async (ctx, next) => {
